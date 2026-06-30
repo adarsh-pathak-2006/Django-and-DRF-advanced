@@ -5,11 +5,11 @@ User=get_user_model()
 
 class IsTeacher(BasePermission):
     def has_permission(self, request, view):
-        return (request.user.is_authenticated and request.user.role=='TEACHER')
+        return (request.user.is_authenticated and request.user.role==User.TEACHER)
     
 class IsStudent(BasePermission):
     def has_permission(self, request, view):
-        return (request.user.is_authenticated and request.user.role=='STUDENT')
+        return (request.user.is_authenticated and request.user.role==User.STUDENT)
     
 class IsStudentAndTeacher(BasePermission):
     def has_permission(self, request, view):
