@@ -22,17 +22,18 @@ class RegisterView(View):
             name=form_data.cleaned_data['username']
             pass1=form_data.cleaned_data['password']
             pass2=form_data.cleaned_data['rep_password']
+            role=form_data.cleaned_data['role']
 
             if pass1==pass2:
                 if User.objects.filter(username=name).exists():
-                    return render(request, 'register.html', { 'user_err':'user already exists' })
+                    return render(request, 'register.html', { 'form': form_data,'user_err':'user already exists' })
                 else:
-                    User.objects.create_user(username=name, password=pass1)
+                    User.objects.create_user(username=name, password=pass1, role=role)
                     return redirect('register')
             else:
-                return render(request, 'register.html', { 'pass_err':'enter the same password in both fields' })
+                return render(request, 'register.html', { 'form': form_data, 'pass_err':'enter the same password in both fields' })
         else:
-            return render(request, 'register.html', { 'invalid':'invalid input' })    
+            return render(request, 'register.html', { 'form': form_data, 'invalid':'invalid input' })    
 
 class CandidateAPI(ListCreateAPIView):
     serializer_class=CandidateSerializer
