@@ -7,4 +7,4 @@ class RegisterForm(forms.Form):
     username=forms.CharField()
     password=forms.CharField(widget=forms.PasswordInput())
     rep_password=forms.CharField(widget=forms.PasswordInput())
-    role=forms.CharField(choices=User.ROLE_CHOICES)
+    role=forms.ChoiceField(choices=User.ROLE_CHOICES)
